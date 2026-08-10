@@ -1,9 +1,15 @@
-#x = int(raw_input("Informe um numero:"))
-#print"O numero informado foi:", x
+# EXERCÍCIOS — IF / ELSE
 
-x = int(input("Informe um numero: "))
-resultado = x * 2
+#1. Notas escolares Peça a nota de um aluno e mostre se ele está aprovado (nota ≥ 7), em recuperação (nota entre 5 e 6,9) ou reprovado (nota &lt; 5).
 
-print("O dobro do numero informado foi:", resultado)
+nota = float(input("Digite a nota: "))
+
+if nota >= 7:
+    print("Aprovado")
+elif nota >= 5:
+    print("Recuperação")
+else:
+    print("Reprovado")
+
 
 
