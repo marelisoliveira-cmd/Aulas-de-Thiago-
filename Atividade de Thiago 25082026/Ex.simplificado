@@ -1,0 +1,8 @@
+numero = float(input("Digite um número:"))
+
+if numero < 10: 
+  print("o número é menor que 10")
+elif numero > 20
+  print("o número é maior que 20")
+else: 
+  print("dentro do intervalo")
