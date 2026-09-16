@@ -1,12 +1,13 @@
 #Imagine que você quer verificar se uma pessoa pode entrar em um evento. A regra é: ela pode entrar se tiver convite OU se for maior de 18 anos 
 
-idade = 15
-convite = False
+idade = int(input("Digite sua idade: "))
+convite = input("Você tem convite? (sim/não): ")
 
-if convite or idade > 18:
+if convite == "sim" or idade > 18:
     print("Pode entrar")
 else:
     print("Não pode entrar")
+
 
 
 
