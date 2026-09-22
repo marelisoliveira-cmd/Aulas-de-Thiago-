@@ -1,0 +1,11 @@
+numero_final = int(input("Digite um número: "))
+numero = 1
+
+while numero <= numero_final:
+	if numero in range(2, numero_final + 1, 2):
+		print(numero)
+	numero += 1
+
+
+
+
