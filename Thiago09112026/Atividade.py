@@ -1,0 +1,94 @@
+from flask import Flask, render_template_string, request
+
+app = Flask(__name__)
+
+HTML_LOGIN = """
+<form method="POST">
+    <h2>Login</h2>
+
+    <input type="text" name="usuario" placeholder="Usuário" required><br><br>
+
+    <input type="password" name="senha" placeholder="Senha" required><br><br>
+
+    <button type="submit">Entrar</button>
+</form>
+"""
+
+HTML_CALCULADORA = """
+<h2>Calculadora</h2>
+
+<form method="POST" action="/calcular">
+
+    <input type="number" step="any" name="numero1" placeholder="Primeiro número" required><br><br>
+
+    <input type="number" step="any" name="numero2" placeholder="Segundo número" required><br><br>
+
+    <select name="operacao">
+        <option value="+">Soma (+)</option>
+        <option value="-">Subtração (-)</option>
+        <option value="*">Multiplicação (*)</option>
+        <option value="/">Divisão (/)</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Calcular</button>
+
+</form>
+"""
+
+
+@app.route("/", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+        usuario = request.form["usuario"]
+        senha = request.form["senha"]
+
+        if usuario == "admin" and senha == "1234":
+            return render_template_string(HTML_CALCULADORA)
+
+        return """
+        <h2>Usuário ou senha incorretos!</h2>
+        <a href="/">Tentar novamente</a>
+        """
+
+    return render_template_string(HTML_LOGIN)
+
+
+@app.route("/calcular", methods=["POST"])
+def calcular():
+
+    n1 = float(request.form["numero1"])
+    n2 = float(request.form["numero2"])
+    operacao = request.form["operacao"]
+
+    if operacao == "+":
+        resultado = n1 + n2
+    elif operacao == "-":
+        resultado = n1 - n2
+    elif operacao == "*":
+        resultado = n1 * n2
+    elif operacao == "/":
+        if n2 == 0:
+            return """
+            <h2>Erro: não é possível dividir por zero.</h2>
+            <a href="/">Voltar</a>
+            """
+        resultado = n1 / n2
+
+    return f"""
+    <h1>Resultado</h1>
+
+    <p>{n1} {operacao} {n2} = <strong>{resultado}</strong></p>
+
+    <br>
+    <a href="/">Nova operação</a>
+    """
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+ 
+ 
